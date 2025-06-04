@@ -108,6 +108,15 @@ class ConditionLayout(QHBoxLayout):
         else:
             self.input_widget.setText(value)
 
+    def delete_widget(self):
+        self.parent().removeItem(self)
+        for i in reversed(range(self.count())):
+            item = self.takeAt(i)
+            widget = item.widget()
+            if widget:
+                widget.setParent(None)
+                widget.deleteLater()
+
 class RuleEditor(QWidget):
     def __init__(self, project, /):
         super().__init__()
@@ -147,8 +156,11 @@ class RuleEditor(QWidget):
         for ch in self.conditions_layout.children():
             self.project.rules.append(ch.to_rule())
 
+    def clear_conditions_layout(self):
+        for i in self.conditions_layout.children():
+            i.delete_widget()
+
     def refresh(self):
-        for ch in reversed(self.conditions_layout.children()):
-            ch.deleteLater()
+        self.clear_conditions_layout()
         for rule in self.project.rules:
             self.add_condition_row(rule)
