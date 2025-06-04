@@ -55,14 +55,6 @@ class DateAttribute(AbstractAttributeType):
         return not (date.year == 9999)
 
 
-class FuzzyNumAttribute(AbstractAttributeType):
-    NAME = "Нечёткое число"
-
-
-class FuzzyVarAttribute(AbstractAttributeType):
-    NAME = "Нечёткая переменная"
-
-
 class LinguisticVarAttribute(AbstractAttributeType):
     NAME = "Лингвистическая переменная"
 
@@ -72,8 +64,6 @@ class AttributeTypeEnum(Enum):
     SYMBOLIC = SymbolicAttribute
     BOOLEAN = BooleanAttribute
     DATE = DateAttribute
-    FUZZY_NUM = FuzzyNumAttribute
-    FUZZY_VAR = FuzzyVarAttribute
     LINGUISTIC_VAR = LinguisticVarAttribute
 
     @classmethod
